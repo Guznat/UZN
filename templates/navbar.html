@@ -1,0 +1,71 @@
+{% load static %}
+<nav style="margin-bottom: 30px" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a href="{% url 'homepage' %}"><img id="logo_uzn" class="navbar-brand" src="{% static 'media/other/Logo_poziomo.png' %}"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'product_list' %}">Produkty </a>
+            </li>
+        <li class="nav-item active">
+                <a class="nav-link" href="{% url 'index' %}">Galeria </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'contact' %}">Kontakt</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    {% if user.is_authenticated %}
+                       Witaj {{ user.username }}.
+                        {% else %}
+                        Witaj gościu.
+
+                    {% endif %}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% if user.is_authenticated %}
+                        <a id="login_p" class="btn btn-primary btn-sm" href="{% url 'logout' %}" role="button">Logout <i
+                                class="fas fa-sign-out-alt"></i></a>
+                        <a id="login_p" class="btn btn-primary btn-sm" href="{% url 'my_profile' user.id %}" role="button">Profil <i class="fas fa-user-alt"></i></a>
+{#                        <a id="login_p" class="btn btn-primary btn-sm" href="{% url 'profile' user.id %}" role="button">Profile</a>#}
+{#                        <a class="dropdown-item" href="#">Something else here</a>#}
+                    {% else %}
+                        <p>
+                        <a id="login_p" class="btn btn-primary btn-sm" href="{% url 'login' %}" role="button">Login <i
+                                class="fas fa-sign-in-alt"></i></a>
+                        <a id="login_p" class="btn btn-primary btn-sm" href="{% url 'signup' %}" role="button">Signup! <i
+                                class="fas fa-sign-in-alt"></i></a>
+                    {% endif %}
+            </li>
+        </ul>
+    <div class="facebook_navbar">
+        <a class="facebook_icon" href="https://www.facebook.com/xrom1/"><i class="fab 5 fa-facebook-square"></i></a>
+    </div>
+    <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{% url 'order_summary' %}" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Koszyk <i class="fas fa-cart"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% if empty %}
+                    Dodaj cos do koszyka.
+                    {% else %}
+                <a class="btn btn-primary btn-sm" href="{% url 'order_summary' %}" role="button">Przejdz do koszyka <i class="fas fa-shopping-cart"></i></a>
+                    {% endif %}
+                </div></li>
+        <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'product_list' %}">
+            <input class="form-control mr-sm-2" type="search" name="q" placeholder="Szukaj przedmiotu"
+                   value="{{ request.GET.q }}" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Szukaj!</button>
+        </form>
+    </div>
+</nav>

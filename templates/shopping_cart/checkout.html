@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-8">
+        <table class="table">
+
+            <td><h4>Podsumowanie zamówienia.</h4></td>
+
+          <tr>
+            <td>
+              {% for item in order.get_cart_items %}
+                <tr>
+                  <td>{{ item }}</td>
+                  <td>{{ item.product.price }} zł.</td>
+                </tr>
+              {% endfor %}
+
+          <tr>
+            <td><strong>Cena końcowa:</strong> </td>
+            <td> <strong>{{ order.get_cart_total }} zł.</strong></td>
+          </tr>
+        </table>
+    <a href="{% url 'purchase_success' %}"> <button onclick="toggleDisplay();" class="btn btn-info" style="width: 100%;">Kup </button></a>
+      </div>
+
+
+{% endblock %}

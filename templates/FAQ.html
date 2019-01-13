@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}
+FAQ Najczęściej zadawane pytania.
+{% endblock %}
+{% block content %}
+<div class="container ">
+    <div class="panel-group" id="faqAccordion">
+        <div class="panel panel-default ">
+            <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question0">
+                 <h4 class="panel-title">
+                    <a href="#" class="ing">Jak zapłacic za zamówiony przedmiot?</a>
+              </h4>
+
+            </div>
+            <div id="question0" class="panel-collapse collapse" style="height: 0px;">
+                <div class="panel-body">
+                     <h5><span class="label label-primary">Odpowiedź</span></h5>
+
+                    <p>Po zakupieniu przedmiotu/ów należy wykonać przelew bankowy na konto 22116022020000000019941086.
+                        Jako tytuł przelewu wpisz unikatowy kod zamowienia który znajdziesz
+{% if user.is_authenticated %}
+                        <a href="{% url 'my_profile' user.id %}" class="label label-success">na swoim profilu</a> w zakładce moje
+                        <a href="{% url 'user_orders' user.id %}" class="label label-success">zamówienia</a>. <br>
+                        {% else %}
+                        na swoim profilu w zakładce moje zamówienia
+                        {% endif %}
+                        W przelewie nalezy umiescic tez dane do wysyłki.
+
+                        </p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default ">
+            <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
+                 <h4 class="panel-title">
+                    <a href="#" class="ing">Gdzie znajduje sie sklep?</a>
+              </h4>
+
+            </div>
+            <div id="question1" class="panel-collapse collapse" style="height: 0px;">
+                <div class="panel-body">
+                     <h5><span class="label label-primary">Odpowiedz:</span></h5>
+<p>Sklep znajduje sie na ulicy Sobieskiego 130, wejscie za sklepem sporzywczym na parkingu, mapkę oraz wiecej informacji znajdziesz <a href="{% url 'contact' %}">tutaj</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default ">
+            <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question2">
+                 <h4 class="panel-title">
+                    <a href="#" class="ing">Przedmiot który kupiłem miał wade nie uwzględniona na zdjeciu, co robić?</a>
+              </h4>
+
+            </div>
+            <div id="question2" class="panel-collapse collapse" style="height: 0px;">
+                <div class="panel-body">
+                     <h5><span class="label label-primary">Odpowiedź:</span></h5>
+
+                    <p>Skontaktuj sie z nami za pomocna formularza zgłoszeniowego który znajdziesz <a href="{% url 'contact' %}"> tutaj</a>. </p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default ">
+            <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question3">
+                 <h4 class="panel-title">
+                    <a href="#" class="ing">Kupiłem przedmiot, co z wysyłką?</a>
+              </h4>
+
+            </div>
+            <div id="question3" class="panel-collapse collapse" style="height: 0px;">
+                <div class="panel-body">
+                     <h5><span class="label label-primary">Odpowiedź:</span></h5>
+
+                    <p>Sklep nie prowadzi wysyłki przedmiotów. Na życzenie klienta mozemy wysłać przedmiot do
+                    1m x 1m. Aby ustalic wysyłkę <a href="{% url 'contact' %}"> skontaktuj sie z nami</a>. </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

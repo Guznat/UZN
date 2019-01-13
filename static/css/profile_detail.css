@@ -1,0 +1,16 @@
+.moblist_prf{ width:100%; padding:0;}
+
+.moblist_prf li{floath:left; list-style:none; display:inline;}
+
+.card-img-top {
+    height: 50px;
+    width: 45px;
+}
+
+div#danger-profile {
+
+}
+div#danger-profile img {
+    width: 200px;
+    height: 200px;
+}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %} Zaloguj się {% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="alert alert-danger" role="alert">
+            You are already here {{ user.username }}
+        </div>
+    {% else %}
+        <div class="card" style="width: 600px">
+            <div class="card-body">
+                <form role="form" method="post">
+                    <legend>Logowanie</legend>
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                    <button type="submit" class="btn btn-success">Login <i class="fas fa-sign-in-alt"></i></button>
+                </form>
+            </div>
+        </div>
+
+    {% endif %}
+{% endblock %}

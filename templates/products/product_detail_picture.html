@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block title %}
+Galeria
+{% endblock %}
+{% block content %}
+
+        <div class="container detailContent">
+            <div class="text-center" id="imageDetail">
+                <figure class="figure">
+                    <img class="figure-img img-fluid rounded" src="/media/{{ object.extra_picture }}">
+                </figure>
+            </div>
+</div>
+
+
+{% endblock %}

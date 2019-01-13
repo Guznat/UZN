@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block title %}
+    Galeria
+{% endblock %}
+{% block content %}
+    <div class="container indexContent">
+
+        {% if topics %}
+            <div class="container">
+                    <div class="row">
+                        {% for topic in topics %}
+                            <div class="col-lg-10" id="{{ topic.id }}">
+                                <button onclick="location.href='/galeria/{{ topic.id }}'"
+                                        class="btn btn-primary">
+                                    {{ topic.name }}
+                                </button>
+                            <br>
+                            <br>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+            </div>
+        {% else %}
+            <p>No topics yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}

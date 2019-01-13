@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block link %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contactbox.css' %}">
+{% endblock %}
+{% block title %}
+    Kontakt
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div id="contactbox-id" class="col-sm-4">
+            <h2 class="text-center">Masz pytanie? Napisz!</h2>
+            <hr align="left" width="50%">
+            <form method="post">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.tel_number|bootstrap }}
+                    {{ form.from_email|bootstrap}}
+                    <small class="form-text text-muted">Aby uzyskać odpowiedz wpisz prawidłowy mail :)</small>
+                    {{ form.subject|bootstrap }}
+                    {{ form.message|bootstrap }}
+                    <script src='https://www.google.com/recaptcha/api.js'></script>
+                    <div class="g-recaptcha" data-sitekey="6Le3kYYUAAAAADfS2ca0-I1v9NMam_H72-BndHfk"></div>
+
+                    <button type="submit" onclick="clickAlert()" class="btn btn-primary">Wyslij <i
+                            class="fas fa-save"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <div class="container">
+                <h2 class="text-center">Jak dojechać.</h2>
+                <hr>
+
+                <div style="width: 800px; height: 600px" id="map"></div>
+                <script>
+
+                    function initMap() {
+                        var myLatLng = {lat: 49.823932, lng: 19.018206};
+
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 17,
+                            center: myLatLng
+                        });
+
+                        var marker = new google.maps.Marker({
+                            position: myLatLng,
+                            map: map,
+                            title: 'Używane z Niemiec'
+                        });
+                    }
+                </script>
+                <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1Q0_P6YiazIxEXMH8jVpgSzOKTqKaI5w&callback=initMap">
+                </script>
+            </div>
+        </div>
+
+        <div id="contact2">
+            <hr align="left" width="50%">
+            <h4 class="pt-2">Adres:</h4>
+            <i class="fas fa-home" style="color:#000"></i>BIELSKO_BIAŁA <br> UL.SOBIESKIEGO 130<br>
+            <h4 class="pt-2">Kontakt:</h4>
+            <i class="fas fa-phone" style="color:#000"></i> <a href="#"> 690432770 </a><br>
+            <i class="fab fa-facebook" style="color:#000"></i><a href="https://www.facebook.com/xrom1/"> Używane z
+            Niemiec </a><br>
+            <h4 class="pt-2">Email:</h4>
+            <i class="fa fa-envelope" style="color:#000"></i> <a href="#">UZN@gmail.com</a><br>
+            <br>
+            <br>
+            <h5 class="pt-2">GODZINY OTWARCIA:</h5>
+            OD PONIEDZIAŁKU DO PIĄTKU:<br>
+            <strong>9:00 - 17:00</strong><br>
+            SOBOTA<br>
+            <strong>9:00 - 14:00</strong><br> <br>
+            WEJŚCIE OD PARKINGU <br>
+            ZA BUDYNKIEM <br>
+
+        </div>
+    </div>
+
+
+    <br><br>
+
+    <script>function clickAlert() {
+        alert("Dziękujemy za wiadomośc")
+    }</script>
+{% endblock %}

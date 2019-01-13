@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block title %}
+    {{ object.name }}
+{% endblock %}
+{% block link %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/product_detail.css' %}">
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="container">
+        <div class="card">
+            <div class="container-fliud">
+                <div class="row">
+                    <div class="col-md-6">
+                        {% for pictures in extra_pictures %}
+                            <a href="/produkty/media/{{ pictures.id }}"><img src="/media/{{ pictures.extra_picture }}"
+                                                                             class="product-detail-img"></a>
+                        {% endfor %}
+
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="product-title">{{ product.name }}</h3>
+                        <h6 class="product-description">Materiał: {{ product.material }}</h6>
+                        <h6 class="product-description">Rozmiar: {{ product.size }}</h6>
+                        <h6 class="product-description">Kolor: {{ product.color }}</h6>
+                        <h6 class="product-description">Stan: {{ product.condition }}</h6>
+                        <h6 class="product-description">Dostępna ilość: {{ product.amount }}</h6>
+                        <h6 class="product-description">Dodatkowa informacja: {{ product.extra_info }}</h6>
+                        <h6 class="product-description">Dodano do ulubionych przez {{ total_fav }} użytkowników.</h6>
+
+                        <h4 class="price">Aktualna cena: <span>{{ product.price }} zł</span></h4>
+
+                        <div class="action">
+                            <form action="{% url 'favourite_product' %}" method="post">
+                                {% csrf_token %}
+                                {% if is_favourited %}
+                                <button class="like btn btn-default" name="product_id" value="{{ product.id }}"
+                                        type="submit">Usuń z ulubionych<span
+                                        class="fa fa-skull"></span>
+                                </button>
+                                {% else %}
+                                <button class="like btn btn-default" name="product_id" value="{{ product.id }}"
+                                        type="submit">Dodaj do ulubionych<span
+                                        class="fa fa-heart"></span>
+                                </button>
+                                {% endif %}
+                            </form>
+
+{% if product.is_available %}
+
+                            <a href="{% url 'add_to_cart' product.id %}"><button class="add-to-cart btn btn-info"  type="button">Dodaj do koszyka</button></a>
+                        {% elif product.orderitem.is_ordered %}
+    <button class="add-to-cart btn btn-info"  type="button">Ten produkt jest juz zarezerwowany.</button>
+{% else %}
+    <button class="add-to-cart btn btn-info"  type="button">Ten produkt jest juz zarezerwowany.</button>
+
+                        {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+{% elif user.is_anonymous %}
+
+    <div class="container">
+        <div class="card">
+            <div class="container-fliud">
+                <div class="row">
+                    <div class="col-md-6">
+                        {% for pictures in extra_pictures %}
+                            <a href="/produkty/media/{{ pictures.id }}"><img src="/media/{{ pictures.extra_picture }}"
+                                                                             class="product-detail-img"></a>
+                        {% endfor %}
+
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="product-title">{{ product.name }}</h3>
+                        <h6 class="product-description">Materiał: {{ product.material }}</h6>
+                        <h6 class="product-description">Rozmiar: {{ product.size }}</h6>
+                        <h6 class="product-description">Kolor: {{ product.color }}</h6>
+                        <h6 class="product-description">Stan: {{ product.condition }}</h6>
+                        <h6 class="product-description">Dostępna ilość: {{ product.amount }}</h6>
+                        <h6 class="product-description">Dodatkowa informacja: {{ product.extra_info }}</h6>
+                        <h6 class="product-description">Dodano do ulubionych przez {{ total_fav }} użytkowników.</h6>
+
+                        <h4 class="price">Aktualna cena: <span>{{ product.price }} zł</span></h4>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+div#category_tabel {
+    margin-bottom: 30px;
+    margin-left: 150px;
+}
+
+div.card-body {
+    width: 350px;
+    height:300px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+div#product_list_card img {
+    width: 350px;
+    height: 250px;
+}
+div#product_list_box {
+    margin-left: 150px;
+}
+ div.product-box {
+     margin-top: 30px;
+     margin-bottom: 30px;
+ }
+/*div.card-body {*/
+    /*background-image: url("/media/other/logo.png");*/
+    /**/
+/*}*/

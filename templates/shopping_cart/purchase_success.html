@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3>Dziekujemy za zakup</h3>
+    Aby zapłacić należy wykonać przelew bankowy na konto 22116022020000000019941086.
+    Jako tytuł przelewu wpisz unikatowy kod zamowienia który znajdziesz
+    <a href="{% url 'my_profile' user.id %}" class="label label-success">na swoim profilu</a> w zakładce moje
+    <a href="{% url 'user_orders' user.id %}" class="label label-success">zamówienia</a>. <br>
+    W przelewie nalezy umiescic tez dane do wysyłki.
+{% endblock %}

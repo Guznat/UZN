@@ -1,0 +1,47 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}">
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<footer>
+    <div class="container-fluid bg-primary py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="row py-0">
+                        <div class="col-sm-1 hidden-md-down">
+                            <a class="bg-circle bg-dark" href="{% url 'contact' %}">
+                                <i class="fa fa-2x fa-fw fa-home" aria-hidden="true "></i>
+                            </a>
+                        </div>
+                        <div class="col-sm-11 text-black">
+                            <div class="store-info">
+                                <p><strong>BIELSKO_BIAŁA UL.SOBIESKIEGO 130</strong></p>
+                                GODZINY OTWARCIA: <br>
+                                PONIEDZIAŁEK-PIĄTEK: <strong>9:00 - 17:00</strong><br>
+                                SOBOTA: <strong>9:00 - 14:00</strong><br>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="d-inline-block">
+                        <div class="bg-circle-outline d-inline-block" style="background-color:#3b5998">
+                            <a href="https://www.facebook.com/"><i class="fa fa-2x fa-fw fa-facebook text-white"></i>
+                            </a>
+                        </div>
+                        <div class="bg-circle-outline d-inline-block" style="background-color: greenyellow">
+                            <a href="{% url 'contact' %}">
+                                <i class="fa fa-2x fa-fw fa-phone text-white"></i></a>
+                        </div>
+                        <strong id="telephone">604477676</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<p class="text-center"> Copyright © Create with django by <a href="https://pl.linkedin.com/in/natan-guzik-9664ab118">
+    Natan Guzik</a>. All right reserved. </p>

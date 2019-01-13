@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block title %}
+Galeria
+{% endblock %}
+{% block content %}
+
+        <div class="container topicContent">
+        <div class="row">
+            {% if images %}
+                    {% for object in images %}
+                            <div class="col-lg-4">
+                              <a href="/galeria/media/{{object.id}}"><img height="200px" width="200px" class="img-thumbnail"  src="/media/{{ object.image }}" alt="{{ object.name }}"></a>
+                            </div>
+                          {% endfor %}
+                      </div>
+                 </div>
+            {% else %}
+                <p>No images yet.</p>
+            {% endif %}
+</div>
+
+{% endblock %}

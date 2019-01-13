@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/product_list.css' %}">
+{% endblock %}
+{% block title %}
+    Produkty
+{% endblock %}
+
+{% block content %}
+    <div id='category_tabel' class="row">
+        <div class="col-lg-8">
+            <ul class="nav nav-tabs">
+
+                {% for c in category %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/produkty/?q={{ c.name|join:'' }}">{{ c.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    {% if object_list %}
+        <div id="product_list_box" class="row">
+
+            {% for obj in object_list %}
+                <div class="product-box">
+<div class="col-sm-12">
+                        <div  id="product_list_card" class="card">
+                            <img src="/media/{{ obj.picture }}" class="card-img-top" alt="{{ obj.name }}">
+                            <div class="card-body">
+                                <a style="float:right" href="{% url 'product_detail' obj.id %}" class="btn btn-primary">Zobacz</a>
+                                <h5 class="card-title">{{ obj.name }}</h5>
+                                <p class="card-text">{{ obj.description }}</p>
+                                <p class="card-text">Cena: {{ obj.price }}</p>
+                                <footer class="blockquote-footer">{{ obj.add_date|date }}</footer>
+                                {% if obj.is_available  %}
+                                <p style="color: green" class="card-text">Produkt dostępny.</p>
+                                {% else %}
+                                <p style="color: red" class="card-text">Produkt niedostępny.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Niema takiego produktu.
+        </div>
+    {% endif %}
+{% endblock %}

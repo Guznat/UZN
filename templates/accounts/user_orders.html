@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/user_order.css' %}">
+{% endblock %}
+{% block title %}
+Twoje zamowienia
+{% endblock %}
+{% block content %}
+
+
+{% for order in my_orders %}
+   {% if order.is_ordered %}
+       <div class="card">
+  <h5 class="card-header">Twój specjalny kod zamówienia: {{ order.ref_code }}</h5>
+  <div class="card-body">
+          <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Zamówiono:
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {% for o in order.get_cart_items %}
+    <a class="dropdown-item" href="{% url 'product_detail' o.product.id %}">{{ o.product.name }}</a>
+       {% endfor %}
+  </div>
+</div>
+    <p class="card-text"><small>{{ order.date_ordered|timesince}} | {{ order.date_ordered }}</small></p>
+
+  </div>
+</div>
+
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

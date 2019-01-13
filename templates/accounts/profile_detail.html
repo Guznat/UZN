@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block link %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile_detail.css' %}">
+
+{% endblock %}
+{% block title %}
+    Profil
+{% endblock %}
+{% block content %}
+    {% if user == request.user %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="text-center">Twój profil:</h3>
+                <div class="text-right" style="padding-bottom:10px;">
+                    <ul class="moblist_prf">
+                        <li><a href="{% url 'profile_update' %}"
+                               data-original-title="Edit this user" class="btn btn-info btn-sm" type="button">Edytuj profil</a></li>
+                        <li><a href="{% url 'change_password' %}" data-original-title="Change Password"
+                               class="btn btn-danger btn-sm" type="button">Zmień hasło</a></li>
+                        <li><a href="{% url 'user_orders' user.id %}"
+                               data-original-title="Change Password" class="btn btn-success btn-sm" type="button">Moje zamówienia</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="col-xs-12 text-center">
+{#                    <img alt="User Pic" src="http://localhost/aparanji_git/public/assets/img/no-image.png"#}
+{#                         class="img-circle">#}
+                </div>
+                <table class="table table-bordered">
+                    <tbody>
+
+                    <tr>
+                        <td>First Name</td>
+                        <td>{{ user.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td>{{ user.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="btn btn-primary" type="button" data-toggle="collapse"
+                                    data-target="#collapseExample" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                Obserwowane przedmioty
+                            </button>
+                        </td>
+                        <td>
+                            <div class="collapse" id="collapseExample">
+                                <div class="card card-body">
+                                    {% for f in fav %}
+                                        <li class="media">
+                                            <img src="/media/{{ f.picture }}" style="height: 100px; width: 100px"
+                                                 alt="{{ f.name }}">
+                                            <div class="media-body"><a
+                                                    href="{% url 'product_detail' f.id %}"> {{ f.name }}</a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    {% else %}
+        <div id="danger-profile" class="alert alert-danger" role="alert">
+            To nie jest twoj profil.
+            <img src="/media/other/danger.png">
+        </div>
+    {% endif %}
+{% endblock %}

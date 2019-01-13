@@ -1,0 +1,6 @@
+<form action="{% url 'favourite_product' %}" method="post">
+    {% csrf_token %}
+    <button class="like btn btn-default" name="product_id" value="{{ product.id }}" type="submit"><span
+            class="fa fa-heart"></span>
+    </button>
+</form>

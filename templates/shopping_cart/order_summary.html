@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+{% if order %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-12 col-md-10 col-md-offset-1">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th class="text-center">Cena:</th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    {% for item in order.get_cart_items %}
+                        <tbody>
+                        <tr>
+                            <td class="col-sm-8 col-md-6">
+                                <div class="media">
+                                    <a class="thumbnail pull-left" href="#"> <img class="media-object"
+                                                                                  src="/media/{{ item.product.picture }}"
+                                                                                  style="width: 72px; height: 72px;">
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a
+                                                href="{% url  'product_detail' item.product.id %}">{{ item.product.name }}</a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>{{ item.product.price }}</strong></td>
+                            <td class="col-sm-1 col-md-1">
+                                <a href="{% url 'delete_item' item.id %}" data-balloon="remove this item from cart"
+                                   class="text-danger" onclick="return confirm_delete();">
+                                    <button type="button" class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-remove"></span> Usuń
+                                    </button>
+                                </a></td>
+
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td><h3>Suma:</h3></td>
+                        <td class="text-right"><h3><strong>{{ order.get_cart_total }} zł.</strong></h3></td>
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>
+
+
+    {% else %}
+    <tr>
+<td><h3>Koszyk jest pusty.</h3></td>
+</tr>
+
+                            {% endif %}
+    <a href="{% url 'product_list' %}">
+                                {% if order %}
+
+                                    <button type="button" class="btn btn-info">
+                                         Kontynuuj zakupy.
+                                    </button>{% else %}
+                                    <button type="button" class="btn btn-info">
+                                         Dodaj przedmioty do
+                                        koszyka.
+                                    </button>{% endif %}
+                            </a>
+                        <td>
+                            {% if order.get_cart_items %}
+                                <a href="{% url 'checkout' %}">
+                                    <button type="button" class="btn btn-success">
+                                        Realizacja zamowienia.<span class="glyphicon glyphicon-play"></span>
+                                    </button>
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        function confirm_delete() {
+            return confirm("Do you want to remove this item from cart?");
+        }
+    </script>
+
+
+{% endblock %}
+
+
+
